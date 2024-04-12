@@ -675,7 +675,7 @@ searchButton.addEventListener('click', () => {
         document.querySelector('.total-ingresos').addEventListener('click', function() {
     const tableRows = document.querySelectorAll('#tableBody tr');
     tableRows.forEach((tableRow) => {
-        const correctas = parseInt(tableRow.querySelector('td:nth-child(5)').textContent); // Obtiene el valor de "correctas" en la fila actual
+        const correctas = parseInt(tableRow.querySelector('td:nth-child(6)').textContent); // Obtiene el valor de "correctas" en la fila actual
         if (correctas === 8) {
             tableRow.style.display = ''; // Muestra la fila si "correctas" es igual a 8
         } else {
