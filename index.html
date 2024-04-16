@@ -424,10 +424,22 @@ async function exportarDataCSV() {
 // Función para convertir la data en formato CSV
 function convertirDataACSV(data) {
     const headers = Object.keys(data[0]).join(',');
-    const csvRows = data.map((row) => Object.values(row).join(','));
+    const csvRows = data.map(row => {
+        // Mapeamos cada valor y encerramos los valores entre comillas dobles
+        const rowValues = Object.values(row).map(value => {
+            if (typeof value === 'string') {
+                // Si el valor es una cadena que contiene comas, lo rodeamos con comillas dobles
+               
+                    return `"${value.replace(/"/g, '""')}"`; // Escapamos las comillas dobles dentro del valor
+               
+            } else {
+                return value;
+            }
+        });
+        return rowValues.join(',');
+    });
     return headers + '\n' + csvRows.join('\n');
 }
-
 
 /*
 // Obtén una referencia al botón de exportar detalle a CSV
