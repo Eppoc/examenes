@@ -425,13 +425,10 @@ async function exportarDataCSV() {
 function convertirDataACSV(data) {
     const headers = Object.keys(data[0]).join(',');
     const csvRows = data.map(row => {
-        // Mapeamos cada valor y encerramos los valores entre comillas dobles
         const rowValues = Object.values(row).map(value => {
             if (typeof value === 'string') {
-                // Si el valor es una cadena que contiene comas, lo rodeamos con comillas dobles
-               
-                    return `"${value.replace(/"/g, '""')}"`; // Escapamos las comillas dobles dentro del valor
-               
+                // Si el valor es una cadena que contiene comas o comillas, lo rodeamos con comillas dobles
+                return `"${value.replace(/"/g, '""').replace(/\n|\r/g, '')}"`; // Escapamos las comillas dobles y eliminamos los saltos de línea
             } else {
                 return value;
             }
